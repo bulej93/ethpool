@@ -42,19 +42,17 @@ describe("EthPool contract", function () {
     })
 
     it('should withdraw rewards and Eth', async function () {
-      //deposit eth
+     
       const provider = waffle.provider;
       await wallet2.sendTransaction({to: ethpool.address, value: 150})
       await wallet1.sendTransaction({to: ethpool.address, value: 150})
       await owner.sendTransaction({to: ethpool.address, value: 150})
       
-      //deposit rewards
+      
       await daitoken.approve(ethpool.address, 300)
       await ethpool.connect(owner).depositRewards(300)
 
       
-      
-      //withdraw rewards
       await ethpool.connect(wallet2).withdrawRewards(150)
       await ethpool.connect(owner).withdrawRewards(150)
       await ethpool.connect(wallet1).withdrawRewards(150)
